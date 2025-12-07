@@ -19,4 +19,42 @@ class FileManager:
         self.values = [0]*max_keys
     def full(self):
         return self.number_of_keys == max_keys
-    
+    def serialize(self):
+        data = bytearray(block_size)
+        offset = 0
+
+        struct.pack_into('>Q', data, offset, self.block_id)
+        offset += 8
+        struct.pack_into('>Q', data, offset, self.parent_id)
+        offset += 8
+        struct.pack_into('>I', data, offset, self.number_of_keys)
+        offset += 8
+        for i in range(max_keys):
+            struct.pack_into('>Q', data, offset, self.keys[i])
+            offset += 8
+        for i in range(max_children):
+            struct.pack_into('>Q', data, offset, self.children[i])
+            offset += 8
+        return bytes(data)
+    @staticmethod
+    def deserialize(data):
+        node = FileManager(block_id=block_size)
+        offset = 0
+
+        node.block_id, = struct.unpack_from('>Q', data, offset)
+        offset += 8
+        node.parent_id, = struct.unpack_from('>Q', data, offset)
+        offset += 8
+        node.number_of_keys, = struct.unpack_from('>Q', data, offset)
+        offset += 8
+        for i in range(max_keys):
+            node.keys[i], = struct.unpack_from('>Q', data, offset)
+            offset += 8
+        for i in range(max_children):
+            node.children[i], = struct.unpack_from('>Q', data, offset)
+            offset += 8
+        for i in range(max_children):
+            node.values[i], = struct.unpack_from('>Q', data, offset)
+            offset += 8
+        node.is_leaf = all(child == 0 for child in node.children[:node.number_of_keys + 1])
+        return node

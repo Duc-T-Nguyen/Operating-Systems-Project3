@@ -3,3 +3,8 @@
     -before i created the repo but didn't start on it
     - first started to intialize some variables and defined def __init__ for the FileManager class
     - finished the serialize and deserialize methods 
+-12/08/2025: Session 2 7:00 am
+    - worked on creating rest of the function to iplement the BTree file manager
+    - created BTreeIndex class 
+        - within the create_node function, we first check if the file specificed already exists and if so return a response and exit, otherwise create and open the file
+        - created the create_node, insert_value, write header, read header, create header, etc. ( couldnt finish the inert half child, search methods, and insert non full notes but pushing now at 5:26 pm to save progress )

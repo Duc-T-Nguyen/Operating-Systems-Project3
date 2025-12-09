@@ -8,3 +8,5 @@
     - created BTreeIndex class 
         - within the create_node function, we first check if the file specificed already exists and if so return a response and exit, otherwise create and open the file
         - created the create_node, insert_value, write header, read header, create header, etc. ( couldnt finish the inert half child, search methods, and insert non full notes but pushing now at 5:26 pm to save progress )
+-12/08/2025: session 3 3:42 pm
+    - started back up another session to finish insert_non_full_value(self, node, key, value) and the other insert methods

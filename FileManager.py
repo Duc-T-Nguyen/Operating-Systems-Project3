@@ -127,9 +127,27 @@ class BTreeIndex:
             file.seek(0)
             self.write(header)
     def insert_non_full_value(self, node, key, value):
-         i = node.number_of_keys - 1 
-         if node.is_leaf:
-             while i >= 0 and key < node.keys[i]:
+        i = node.number_of_keys - 1 
+        if node.is_leaf:
+            while i >= 0 and key < node.keys[i]:
+                 node.keys[i + 1] = node.keys[i]
+                 node.values[i + 1] = node.values[i]
+                 i -=1
+            node.keys[i + 1] = key
+            node.values[i + 1] = value
+            node.number_of_keys += 1
+            self.write_node(node)
+        else:
+            while i >= 0 and key < node.keys[i]:
+                i -= 1
+            i += 1
+            child = self.read_node(node.children[i])
+            if child.full():
+                self.split_child(node, i)
+                if key > node.keys[i]:
+                    i += 1
+                child = self.read_node(node.children[i])
+            self.insert_non_full_value(child, key, value)
                  
     def split_child(self, parent, index):
     def insert_value(self, key, value):

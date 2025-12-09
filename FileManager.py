@@ -150,6 +150,33 @@ class BTreeIndex:
             self.insert_non_full_value(child, key, value)
                  
     def split_child(self, parent, index):
+        full_child = self.read_node(parent.children[index])
+        new_child = self.allocate_node(parent_id = parent.block_id, is_leaf = full_child.is_leaf)
+        mid = min_degree - 1
+        new_child.number_of_keys = min_degree - 1
+        for i in range(min_degree - 1):
+            new_child.keys[i] = full_child.keys[i + min_degree]
+            new_child.values[i] = full_child.values[i + min_degree]
+        if not full_child.is_leaf:
+            for j in range(min_degree):
+                new_child.children[j] = full_child.children[j + min_degree]
+                if new_child.children[j] != 0: 
+                    kid = self.read_node(new_child.children[i])
+                    kid.parent_id = new_child.block_id
+                    self.write_node(kid)
+        full_child.number_of_keys = mid-1
+        for h in range(parent.number_of_keys, index, -1):
+            parent.children[h + 1] = parent.children[h]
+        parent.children[index + 1] = new_child.block_id
+        for g in range(parent.number_of_keys -1, index-1, -1, -1):
+            parent.keys[g + 1] = parent.keys[g]
+            parent.values[g + 1] = parent.values[g]
+        parent.keys[index ]= full_child.keys[mid]
+        parent.values[index] = full_child.values[mid]
+        parent.number_of_keys += 1
+        self.write_node(full_child)
+        self.write_node(new_child)
+        self.write_node(parent)
     def insert_value(self, key, value):
         self.read_header()
         if self.root_id == 0:
@@ -174,3 +201,7 @@ class BTreeIndex:
         else:
             self.insert_non_full_value(root, key, value)
     def search_value(self, key):
+        self.read_header()
+        if self.root_id == 0:
+            return None
+        return self.search_node(self.read_node(self.root_id), key)

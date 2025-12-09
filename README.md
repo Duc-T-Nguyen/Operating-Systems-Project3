@@ -10,3 +10,4 @@
         - created the create_node, insert_value, write header, read header, create header, etc. ( couldnt finish the inert half child, search methods, and insert non full notes but pushing now at 5:26 pm to save progress )
 -12/08/2025: session 3 3:42 pm
     - started back up another session to finish insert_non_full_value(self, node, key, value) and the other insert methods
+    - heard from fellow seatmate that i might need to have a recusrive method to split the nodes so will have to consider that 

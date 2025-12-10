@@ -8,9 +8,11 @@
     - created BTreeIndex class 
         - within the create_node function, we first check if the file specificed already exists and if so return a response and exit, otherwise create and open the file
         - created the create_node, insert_value, write header, read header, create header, etc. ( couldnt finish the inert half child, search methods, and insert non full notes but pushing now at 5:26 pm to save progress )
--12/08/2025: session 3 3:42 pm
+-12/09/2025: session 3 3:42 pm
     - started back up another session to finish insert_non_full_value(self, node, key, value) and the other insert methods
     - heard from fellow seatmate that i might need to have a recusrive method to split the nodes so will have to consider that 
     - started to add comment ins extract_node_data(self, output): to keep track of my development 
     - also fixed a earlier mistake where i put '>I' instead of '>Q' where is accepted 4 bytes instead of 8 bytes 
     -finished the FileManager.py and now testing it out on creating a index myindex.idx
+-12/10/2025: Session 4 12:50 am
+    - was able to run the tests and it seemed to work now just adding some instructions to run the program

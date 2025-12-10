@@ -11,3 +11,6 @@
 -12/08/2025: session 3 3:42 pm
     - started back up another session to finish insert_non_full_value(self, node, key, value) and the other insert methods
     - heard from fellow seatmate that i might need to have a recusrive method to split the nodes so will have to consider that 
+    - started to add comment ins extract_node_data(self, output): to keep track of my development 
+    - also fixed a earlier mistake where i put '>I' instead of '>Q' where is accepted 4 bytes instead of 8 bytes 
+    -finished the FileManager.py and now testing it out on creating a index myindex.idx

@@ -16,3 +16,15 @@
     -finished the FileManager.py and now testing it out on creating a index myindex.idx
 -12/10/2025: Session 4 12:50 am
     - was able to run the tests and it seemed to work now just adding some instructions to run the program
+
+How to execute: 
+- To create a file in the program you must specify a not already existing file to create: 
+    ex: python3 FileManager.py create test.idx (will create the test.idx file if it does exist )
+    default structure example: python3 FileManager.py create <insert file name here>.idx 
+- If you specify a file that already exist it will return: File aready exists
+- If you want to insert values into the program:
+    default structure example python3 FileManager.py insert <insert file name here>.idx <insert key> <insert value>
+- If you want to search for values in the program:
+    default structure example: python3 FileManager.py search <insert file name here>.idx <insert key>
+- if you want to print the btree:
+    default structure example: python3 FileManager.py print <insert file name here>.idx
